@@ -1,0 +1,58 @@
+CREATE DATABASE Fashion;
+USE Fashion
+
+CREATE TABLE Item
+(
+Item_no INT PRIMARY KEY AUTO_INCREMENT,
+Item_type VARCHAR(50) NOT NULL,
+Quantity INT NOT NULL,
+Materials VARCHAR(50) NOT NULL,
+Size VARCHAR(20) NOT NULL,
+Color VARCHAR(20) NOT NULL,
+Delivery_cost_Colombo DECIMAL(6,2),
+Selling_price DECIMAL(6,2) NOT NULL,
+Purchased_price DECIMAL(6,2) NOT NULL
+);
+
+
+CREATE TABLE Customer
+(
+Customer_ID INT PRIMARY KEY AUTO_INCREMENT,
+First_name VARCHAR(20) NOT NULL,
+Last_name VARCHAR(30) NOT NULL,
+Address1 VARCHAR(30) NOT NULL,
+Address2 VARCHAR(30) NOT NULL,
+Address3 VARCHAR(30) NOT NULL,
+Email VARCHAR(50) NOT NULL,
+Password VARCHAR(40) NOT NULL,
+Gender VARCHAR(10) NOT NULL
+);
+
+
+CREATE TABLE Invoice
+(
+Invoice_No INT PRIMARY KEY AUTO_INCREMENT,
+Customer_ID INT NOT NULL,
+FOREIGN KEY (Customer_ID) REFERENCES Customer (Customer_ID)
+ON UPDATE CASCADE,
+Item_No INT NOT NULL,
+FOREIGN KEY (Item_No) REFERENCES Item (Item_No)
+ON UPDATE CASCADE,
+Quantity INT NOT NULL,
+Delivery_Cost DECIMAL(6,2),
+Date DATE
+);
+
+
+
+INSERT INTO Item(Item_type,Quantity,Materials,Size,Color,Selling_price,Purchased_price)
+VALUES ('Frock',20,'Cotton & Silk','Medium','Light Blue',4730.00,3000.00),
+('Kids Frock',16,'Cotton & Silk','Small','Red',6210.00,4500.00),
+('T-shirt',20,'Cotton','Large','Blue',999.00,780.00),
+('Blouse',27,'Cotton','Large','Black & White',1150.00,900.00),
+('T-shirt',18,'Cotton','Medium','Pink',1200.00,1000.00),
+('Skirt',25,'Cotton','Large','Black & Gray',1150.00,850.00),
+('Denim',15,'Denim','Large','Blue',1790.00,1300.00),
+('Kids Frock',12,'Cotton','Extra Small','Yellow',700.00,540.00),
+('Shoes',14,'Leather','38','Black & Silver',1890.00,1570.00),
+('Shoes',7,'Leather','42','Brown & White',3000.00,1400.00);
